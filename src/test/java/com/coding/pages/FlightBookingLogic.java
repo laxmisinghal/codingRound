@@ -65,10 +65,6 @@ public class FlightBookingLogic extends Base {
 					System.out.println(trySearchingAgain.getText());
 					return false;
 			}
-			// waitFor(5000);
-			// verify that result appears for the provided journey search
-		
-		//	Assert.assertTrue(isElementPresent(By.className("searchSummary")));
 		}catch (Exception e) {
 			e.printStackTrace();
 			return false;

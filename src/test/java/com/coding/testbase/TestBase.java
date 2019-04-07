@@ -36,7 +36,7 @@ public abstract class TestBase {
 			driver = new ChromeDriver();
 			String URL = "https://www.cleartrip.com/";
 			driver.get(URL);
-			Thread.sleep(10000);
+			Thread.sleep(10000); //temp
 			//driver.manage().timeouts().implicitlyWait(20, TimeUnit.SECONDS);
 			//driver.manage().timeouts().implicitlyWait(WaitConfig.PAGE_LOAD_DURATION_DOUBLE, TimeUnit.MILLISECONDS);
 			//	driver.manage().window().maximize();

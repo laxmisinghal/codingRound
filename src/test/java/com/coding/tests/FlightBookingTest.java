@@ -43,13 +43,5 @@ public class FlightBookingTest extends TestBase{
 	    	
     	Assert.assertTrue(flightBooking.oneWayJourneyTest(testData.get("ORIGIN").toString(), testData.get("DESTINATION").toString(), testData.get("YEAR").toString(), testData.get("MONTH").toString(), testData.get("DAY").toString()));
 
-    /*private void waitFor(int durationInMilliSeconds) {
-        try {
-            Thread.sleep(durationInMilliSeconds);
-        } catch (InterruptedException e) {
-            e.printStackTrace();  //To change body of catch statement use File | Settings | File Templates.
-        }
-    }*/
-
   }
 }
