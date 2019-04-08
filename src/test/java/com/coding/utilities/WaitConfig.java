@@ -15,7 +15,7 @@ public class WaitConfig {
 	
 
 	public static void waitForPageToLoad(WebDriver driver, WebElement id) {
-		WebDriverWait wait = new WebDriverWait(driver, 30);
+		WebDriverWait wait = new WebDriverWait(driver, 15);
 		wait.until(ExpectedConditions.visibilityOf(id));
 	}
 
