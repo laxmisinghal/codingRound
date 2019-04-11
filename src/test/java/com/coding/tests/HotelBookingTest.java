@@ -42,16 +42,12 @@ public class HotelBookingTest extends TestBase {
 
 	@Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class, enabled = true)
 	public void tc001_hotelBookingTest(String rowID, String description, JSONObject testData) {
-		
-		Boolean returnType = hotelBooking.hotelBooking(testData.get("LOCALITY").toString(),
+
+		log.debug("Inside Hotel Booking Test");
+		Assert.assertTrue(hotelBooking.hotelBooking(testData.get("LOCALITY").toString(),
 				testData.get("CHECKINYEAR").toString(), testData.get("CHECKINMONTH").toString(),
 				testData.get("CHECKINDAY").toString(), testData.get("CHECKOUTYEAR").toString(),
-				testData.get("CHECKOUTMONTH").toString(), testData.get("CHECKOUTDAY").toString());
-		
-		if(returnType.equals(true)) {
-			Assert.assertTrue(true);
-		}else
-			Assert.assertTrue(false);
+				testData.get("CHECKOUTMONTH").toString(), testData.get("CHECKOUTDAY").toString()));
 	}
 
 }
