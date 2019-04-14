@@ -1,12 +1,18 @@
 package com.coding.pages;
 
+import java.io.File;
+import java.io.IOException;
+import java.util.Date;
 import java.util.List;
+import java.util.Random;
 import java.util.concurrent.TimeUnit;
 
+import org.apache.log4j.Logger;
 import org.openqa.selenium.By;
 import org.openqa.selenium.NoSuchElementException;
+import org.openqa.selenium.OutputType;
+import org.openqa.selenium.TakesScreenshot;
 import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.WebDriverException;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
@@ -15,29 +21,29 @@ import com.coding.utilities.ExtentManager;
 import com.coding.utilities.WaitConfig;
 import com.relevantcodes.extentreports.ExtentReports;
 import com.relevantcodes.extentreports.ExtentTest;
-import com.sun.javafx.PlatformUtil;
+import com.relevantcodes.extentreports.LogStatus;
+import com.coding.utilities.*;
 
 public class Base {
 
 	@FindBy(xpath = "//*[@id=\"ui-datepicker-div\"]/div[1]/div/div/span[2]")
-	protected WebElement currentYear;
-	/*@FindBy(xpath = "//*[@id=\"ui-datepicker-div\"]/div[1]/div/div/span[1]")
-	protected WebElement currentMonth;
-	*/@FindBy(xpath = "//*[@id=\"ui-datepicker-div\"]/div[2]/div/a")
-	protected WebElement nextYearBtn;
-	private String testcasename;
+	public WebElement currentYear;
+	/*
+	 * @FindBy(xpath = "//*[@id=\"ui-datepicker-div\"]/div[1]/div/div/span[1]")
+	 * protected WebElement currentMonth;
+	 */@FindBy(xpath = "//*[@id=\"ui-datepicker-div\"]/div[2]/div/a")
+	public WebElement nextYearBtn;
 
-	protected static WebDriver driver = null;
-	protected ExtentReports extentReports = ExtentManager.getInstance(testcasename);
-	protected static ExtentTest test;
+	public static WebDriver driver = null;
+	public static Logger log = Logger.getLogger("devpinoyLogger");
 
-	protected Base(WebDriver driver) {
+	public Base(WebDriver driver) {
 		this.driver = driver;
 		PageFactory.initElements(driver, this);
 		System.setProperty("file.encoding", "UTF-8");
 	}
 
-	protected boolean isElementPresent(WebElement element) {
+	public boolean isElementPresent(WebElement element) {
 		try {
 			if (element.isDisplayed()) {
 				return true;
@@ -48,7 +54,7 @@ public class Base {
 		return false;
 	}
 
-	protected void setValueToTextField(String input, WebElement element) {
+	public void setValueToTextField(String input, WebElement element) {
 		try {
 			driver.manage().timeouts().implicitlyWait(WaitConfig.PAGE_LOAD_DURATION, TimeUnit.MILLISECONDS);
 			element.click();
@@ -56,6 +62,7 @@ public class Base {
 			System.out.println("input is " + input);
 			element.sendKeys(input);
 		} catch (Exception e) {
+			log.error("Error in entering value");
 			e.printStackTrace();
 		}
 	}
@@ -76,7 +83,7 @@ public class Base {
 				}
 			}
 		} catch (Exception e) {
-			System.out.println("No place found by your search criteria");
+			log.error("No place found by your search criteria");
 			e.printStackTrace();
 		}
 		return false;
@@ -90,8 +97,7 @@ public class Base {
 			int currentYearInt = Integer.parseInt(currentYear.getText());
 
 			System.out.println("desired year is " + desiredYearInt);
-			if (desiredYearInt < currentYearInt)
-			{
+			if (desiredYearInt < currentYearInt) {
 				System.out.println("incorrect year");
 				return false;
 			} else if (desiredYearInt > currentYearInt) {
@@ -99,7 +105,7 @@ public class Base {
 				// click next untill desiredyear==currentyear
 				while (desiredYearInt != currentYearInt) {
 					String presentYear = currentYear.getText();
-					currentYearInt = Integer.parseInt(presentYear); 
+					currentYearInt = Integer.parseInt(presentYear);
 					System.out.println("current year is " + presentYear);
 					if (desiredYearInt == currentYearInt) {
 						return true;
@@ -115,7 +121,7 @@ public class Base {
 			}
 			return true;
 		} catch (Exception e) {
-			System.out.println("error in selecting year");
+			log.error("error in selecting year");
 			e.printStackTrace();
 			return false;
 		}
@@ -123,8 +129,10 @@ public class Base {
 
 	public boolean selectMonth(String month) {
 		try {
-			//defining currentMonth element explicitely here to handle StaleElementReferenceException
-			WebElement currentMonth = driver.findElement(By.xpath("//*[@id=\"ui-datepicker-div\"]/div[1]/div/div/span[1]"));
+			// defining currentMonth element explicitely here to handle
+			// StaleElementReferenceException
+			WebElement currentMonth = driver
+					.findElement(By.xpath("//*[@id=\"ui-datepicker-div\"]/div[1]/div/div/span[1]"));
 			System.out.println(currentMonth.getText());
 			// Select desired month after selecting desired year
 			if (currentMonth.getText().contains(month)) {
@@ -132,18 +140,19 @@ public class Base {
 			} else {
 				// click next untill desiredmonth==currentmonth
 				while (!(currentMonth.getText().contains(month))) {
-					System.out.println("current month is "+currentMonth.getText());
+					System.out.println("current month is " + currentMonth.getText());
 					nextYearBtn.click();
 					WebElement presentMonthAfterNext = driver
 							.findElement(By.xpath("//*[@id=\"ui-datepicker-div\"]/div[1]/div/div/span[1]"));
 					currentMonth = presentMonthAfterNext;
-					System.out.println("current month after clicking next "+currentMonth.getText());
+					System.out.println("current month after clicking next " + currentMonth.getText());
 					if (currentMonth.getText().contains((month))) {
 						return true;
 					}
 				}
 			}
 		} catch (Exception e) {
+			log.error("Error in selecting month");
 			e.printStackTrace();
 			return false;
 		}
@@ -162,7 +171,7 @@ public class Base {
 				}
 			}
 		} catch (Exception e) {
-			System.out.println("error in selecting day");
+			log.error("Error in selecting day");
 			e.printStackTrace();
 			return false;
 		}

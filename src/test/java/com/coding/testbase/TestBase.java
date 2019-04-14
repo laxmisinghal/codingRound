@@ -12,14 +12,20 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
 import org.openqa.selenium.remote.DesiredCapabilities;
+import org.testng.annotations.AfterMethod;
 import org.testng.annotations.AfterSuite;
 import org.testng.annotations.BeforeSuite;
 import org.testng.annotations.BeforeTest;
 
+import com.coding.pages.Base;
+import com.coding.utilities.ExtentManager;
 import com.coding.utilities.WaitConfig;
+import com.relevantcodes.extentreports.ExtentReports;
+import com.relevantcodes.extentreports.ExtentTest;
 //import com.sun.javafx.PlatformUtil;
 import com.sun.jna.Platform;
 import com.sun.jna.platform.unix.X11.Window;
+
 
 public abstract class TestBase {
 
@@ -30,6 +36,9 @@ public abstract class TestBase {
 	public static String includePattern = null;
 	public static final String DATA_FILE = "TestData.json";
 	public static Logger log = Logger.getLogger("devpinoyLogger");
+	public ExtentReports reports = ExtentManager.getInstance();
+	public static ExtentTest test;
+	public static ExtentReports extent;
 
 	@BeforeTest
 	public abstract void setUpPage();
@@ -96,8 +105,9 @@ public abstract class TestBase {
 	public void tearDown() {
 		if (driver != null) {
 			driver.quit();
-			log.debug("Driver closed");
 		}
+		log.debug("Driver closed");
 	}
+
 
 }
