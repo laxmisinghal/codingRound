@@ -7,12 +7,10 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 
 public class WaitConfig {
 
-	
 	public static final int PAGE_LOAD_DURATION = 5000;
 	public static final int PAGE_LOAD = 2000;
 	public static final int PAGE_LOAD_DURATION_DOUBLE = 10000;
 	public static final int PAGE_LOAD_DURATION_TRIPLE = 30000;
-	
 
 	public static void waitForPageToLoad(WebDriver driver, WebElement id) {
 		WebDriverWait wait = new WebDriverWait(driver, 15);

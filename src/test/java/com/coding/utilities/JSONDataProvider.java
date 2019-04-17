@@ -81,7 +81,7 @@ public class JSONDataProvider {
 		InputStream inputStream = Thread.currentThread().getContextClassLoader().getResourceAsStream(file);
 		JSONParser jsonParser = new JSONParser();
 		return (JSONObject) jsonParser.parse(new InputStreamReader(inputStream, "UTF-8"));
-		
+
 	}
 
 }
