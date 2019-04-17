@@ -9,7 +9,10 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 
+import com.coding.testbase.TestBase;
+import com.coding.utilities.GetScreenShot;
 import com.coding.utilities.WaitConfig;
+import com.relevantcodes.extentreports.LogStatus;
 import com.sun.javafx.PlatformUtil;
 
 public class FlightBookingPage extends Base {
@@ -26,6 +29,9 @@ public class FlightBookingPage extends Base {
 	private WebElement searchSummary;
 	@FindBy(id = "//*[@id=\"ResultContainer_1_1\"]/div[2]/div/a")
 	private WebElement trySearchingAgain;
+	//@FindBy(id="//*[@id=\"GlobalNav\"]/div/div[1]/a/span")
+	@FindBy(className="cleartripLogo")
+	private WebElement cleartripHome;
 
 	public FlightBookingPage(WebDriver driver) {
 		super(driver);
@@ -35,17 +41,16 @@ public class FlightBookingPage extends Base {
 		try {
 			oneWay.click();
 			log.debug("One Way clicked");
-
 			// select origin and wait when element is loading
 			setValueToTextField(origin, fromTag);
-			driver.manage().timeouts().implicitlyWait(WaitConfig.PAGE_LOAD_DURATION, TimeUnit.MILLISECONDS);
+			//driver.manage().timeouts().implicitlyWait(WaitConfig.PAGE_LOAD_DURATION, TimeUnit.MILLISECONDS);
 			List<WebElement> originOptionsList = driver.findElement(By.id("ui-id-1")).findElements(By.tagName("li"));
 			selectPlaceFromDropDown(originOptionsList, fromTag);
 			log.debug("Origin place entered");
 
 			// select destination and wait when element is loading
 			setValueToTextField(destination, toTag);
-			driver.manage().timeouts().implicitlyWait(WaitConfig.PAGE_LOAD, TimeUnit.MILLISECONDS);
+			//driver.manage().timeouts().implicitlyWait(WaitConfig.PAGE_LOAD, TimeUnit.MILLISECONDS);
 			List<WebElement> destinationOptionsList = driver.findElement(By.id("ui-id-2"))
 					.findElements(By.tagName("li"));
 			selectPlaceFromDropDown(destinationOptionsList, toTag);
@@ -57,9 +62,15 @@ public class FlightBookingPage extends Base {
 			log.debug("Departure date selected");
 			// all fields filled in. Now click on search
 			searchButton.click();
-			driver.manage().timeouts().implicitlyWait(WaitConfig.PAGE_LOAD_DURATION_TRIPLE, TimeUnit.MILLISECONDS);
-			if (isElementPresent(searchSummary)) {
+			WebElement flightDetails = driver.findElement(By.xpath("//*[@id=\"flightForm\"]/section[2]/div[4]/div/nav/ul/li[2]/table"));
+			WaitConfig.waitForPageToLoad(driver, flightDetails);
+			if (isElementPresent(flightDetails)) {
+				
+			//	WaitConfig.waitForPageToLoad(driver, cleartripHome);
 				log.debug("Search results displayed");
+				System.out.println("search results displayed");
+		//		WaitConfig.waitForPageToLoad(driver, cleartripHome);
+				cleartripHome.click();
 				return true;
 			} else if (isElementPresent(trySearchingAgain)) {
 				trySearchingAgain.click();
@@ -68,7 +79,7 @@ public class FlightBookingPage extends Base {
 				return false;
 			}
 		} catch (Exception e) {
-			e.printStackTrace();
+ 			e.printStackTrace();
 			return false;
 		}
 		return false;

@@ -28,10 +28,7 @@ public class Base {
 
 	@FindBy(xpath = "//*[@id=\"ui-datepicker-div\"]/div[1]/div/div/span[2]")
 	public WebElement currentYear;
-	/*
-	 * @FindBy(xpath = "//*[@id=\"ui-datepicker-div\"]/div[1]/div/div/span[1]")
-	 * protected WebElement currentMonth;
-	 */@FindBy(xpath = "//*[@id=\"ui-datepicker-div\"]/div[2]/div/a")
+	@FindBy(xpath = "//*[@id=\"ui-datepicker-div\"]/div[2]/div/a")
 	public WebElement nextYearBtn;
 
 	public static WebDriver driver = null;
