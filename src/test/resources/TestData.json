@@ -1,0 +1,23 @@
+{
+	"tc001_flightBookingTest": [{
+		"rowID": "FlightBooking.01",
+		"description": "Flight Booking Test",
+		"ORIGIN": "Bangalore",
+		"DESTINATION": "Delhi",
+		"YEAR": "2020",
+		"MONTH": "Feb",
+		"DAY": "25"
+	}],
+	
+	"tc001_hotelBookingTest": [{
+		"rowID": "HotelBooking.01",
+		"description": "Hotel Booking Test",
+		"LOCALITY": "Indiranagar, Bangalore",
+		"CHECKINYEAR": "2020",
+		"CHECKINMONTH": "Feb",
+		"CHECKINDAY": "15",
+		"CHECKOUTYEAR": "2020",
+		"CHECKOUTMONTH": "Mar",
+		"CHECKOUTDAY": "21"
+	}]
+}
