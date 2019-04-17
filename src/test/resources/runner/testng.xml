@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
+<suite name="SanityTest">
+
+<listeners>
+      <listener class-name="org.uncommons.reportng.HTMLReporter"/>
+      <listener class-name="org.uncommons.reportng.JUnitXMLReporter"/>
+      <listener class-name="com.coding.listeners.CustomListeners"/>
+      
+  </listeners>  
+  
+	<test name="FlightBookingTest">
+		<classes>
+			<class name="com.coding.tests.FlightBookingTest" />
+		</classes>
+	</test> <!-- Test -->
+	
+	<test name="HotelBookingTest">
+		<classes>
+			<class name="com.coding.tests.HotelBookingTest" />
+		</classes>
+	</test> <!-- Test -->
+	
+		<test name="SignInTest">
+		<classes>
+			<class name="com.coding.tests.SignInTest" />
+		</classes>
+	</test> <!-- Test -->
+	
+
+</suite> <!-- Suite -->
