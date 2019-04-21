@@ -69,7 +69,6 @@ public class FlightBookingPage extends Base {
 			if (isElementPresent(flightDetails)) {
 				//	WaitConfig.waitForPageToLoad(driver, cleartripHome);
 				log.debug("Search results displayed");
-				System.out.println("search results displayed");
 		//		WaitConfig.waitForPageToLoad(driver, cleartripHome);
 				cleartripHome.click();
 				return true;

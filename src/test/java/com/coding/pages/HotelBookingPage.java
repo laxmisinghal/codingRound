@@ -32,6 +32,13 @@ public class HotelBookingPage extends Base {
 	@FindBy(xpath = "//*[@id=\"SearchForm\"]/section[2]/div[2]/dl/dd/div/i")
 	private WebElement checkOutCalendar;
 
+	@FindBy(className="cleartripLogo")
+	private WebElement cleartripHome;
+	
+	@FindBy(className = "button.button.booking.hotelDetails")
+	private WebElement viewDetailsBtn;
+	
+	
 	public HotelBookingPage(WebDriver driver) {
 		super(driver);
 	}
@@ -64,6 +71,9 @@ public class HotelBookingPage extends Base {
 
 			new Select(travellerSelection).selectByVisibleText("1 room, 1 adult");
 			searchButton.click();
+			isElementPresent(viewDetailsBtn);
+			log.debug("Search results displayed");
+			cleartripHome.click();
 			return true;
 		} catch (Exception e) {
 			return false;

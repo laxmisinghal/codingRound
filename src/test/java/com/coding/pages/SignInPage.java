@@ -51,7 +51,8 @@ public class SignInPage extends Base {
 			
 			List<WebElement> nameOfFrame = driver.findElements(By.tagName("iframe"));
 			driver.switchTo().frame(1); // since there is only 1 frame, not using iteration
-			WaitConfig.waitForPageToLoad(driver, signInPopUp);
+		//	WaitConfig.waitForPageToLoad(driver, signInPopUp);
+		//	driver.manage().timeouts().implicitlyWait(WaitConfig.PAGE_LOAD_DURATION, TimeUnit.MILLISECONDS);
 			signInPopUp.click();
 			isElementPresent(errors);
 			driver.switchTo().defaultContent();
