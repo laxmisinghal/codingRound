@@ -53,9 +53,8 @@ public class Base {
 
 	public void setValueToTextField(String input, WebElement element) {
 		try {
-			driver.manage().timeouts().implicitlyWait(WaitConfig.PAGE_LOAD_DURATION, TimeUnit.MILLISECONDS);
+			WaitConfig.waitForPageToLoad(driver, element);
 			element.click();
-			driver.manage().timeouts().implicitlyWait(WaitConfig.PAGE_LOAD_DURATION, TimeUnit.MILLISECONDS);
 			System.out.println("input is " + input);
 			element.sendKeys(input);
 		} catch (Exception e) {
@@ -66,7 +65,6 @@ public class Base {
 
 	public boolean selectPlaceFromDropDown(List<WebElement> elementList, WebElement ddElement) {
 		try {
-			driver.manage().timeouts().implicitlyWait(WaitConfig.PAGE_LOAD, TimeUnit.MILLISECONDS);
 			System.out.println("list size is " + elementList.size());
 			for (int i = 1; i <= elementList.size(); i++) {
 				for (WebElement eachElement : elementList) {
